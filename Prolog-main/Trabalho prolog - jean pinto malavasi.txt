@@ -1,0 +1,73 @@
+				Código		 Aluno: Jean Pinto Malavasi
+/*ESQUADRO
+REGU
+COMPASSO
+TRANSFERIDOR
+CARTOLINA
+BORRACHA
+LIVRO
+CADERNO
+PINCEL
+LAPISEIRA*/
+
+%%FATOS
+tem_papelaria(esquadro).
+tem_papelaria(regua).
+tem_papelaria(compasso).
+tem_papelaria(transferidor).
+tem_papelaria(cartolina).
+tem_papelaria(borracha).
+tem_papelaria(livro).
+tem_papelaria(caderno).
+tem_papelaria(pincel).
+tem_papelaria(lapiseira).
+
+escreve(pincel, cartolina).
+escreve(pincel, livro).
+escreve(pincel, caderno).
+
+escreve(lapiseira, cartolina).
+escreve(lapiseira, livro).
+escreve(lapiseira, caderno).
+
+apaga(borracha, lapiseira).
+
+tem_medida(regua).
+tem_medida(transferidor).
+tem_medida(esquadro).
+tem_medida(compasso).
+
+rasga(cartolina).
+rasga(livro).
+rasga(caderno).
+
+%%REGRAS
+nao_escreve(E, NE):- tem_papelaria(NE),  \+escreve(E, NE); \+escreve(E, NE).
+nao_apaga(APG, NAPG):- tem_papelaria(NAPG),   \+apaga(APG, NAPG).
+nao_geometria(NGEO):- tem_papelaria(NGEO), \+tem_medida(NGEO).
+
+escreve_grafite(ESCRG):- escreve(lapiseira, _).
+escreve_tinta(ESCRT):- escreve(pincel, _).
+
+pode_apaga(APG, NAPG):- tem_papelaria(NAPG),   apaga(APG, NAPG).
+pode_escrever(PESCR):- escreve(PESCR, _); escreve(PESCR, _), !, fail.
+pode_cortar(tesoura,A):- rasga(A).
+
+
+
+
+
+
+
+Consultas
+
+?- escreve(X,Y).
+?- tem_papelaria(Oque).
+?- nao_escreve(E,NE).
+?- nao_apaga(APG,NAPG).
+?- pode_apaga(APG,_).
+?- nao_geometria(NGEO).
+?- pode_escrever(A).
+?- pode_rasgar(A).
+?- escreve_tinta(pincel).
+?- escreve_grafite(lapiseira).
